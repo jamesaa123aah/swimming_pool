@@ -1,6 +1,7 @@
 package com.swimming.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -20,6 +21,7 @@ import javax.swing.JTree;
  * 上部、中左、中右
  */
 import javax.swing.SpringLayout.Constraints;
+import javax.swing.WindowConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
 public class UiMain extends JFrame{
 
@@ -30,23 +32,32 @@ public class UiMain extends JFrame{
 		
 		
 		/*
+		 * 主界面主要分为四个部分
+		 * 第一部分：
+		 * 菜单
+		 * 另外三个部分分别是三个面板
 		 * 三块固定面板的创建
 		 */
-		JPanel jPanel1 = new JPanel(new FlowLayout());
 		
-//		往第二个面板里添加树
-		TreeA treeA = new TreeA();
-		JPanel jPanel2 = treeA.getTree();
-		
-		
-//		将表格添加到第三个面板
-		JtableA jtableA = new JtableA();
-		JPanel jPanel3 = jtableA.getTable();
+//		在主界面设置菜单栏
+		MenuA menuA = new MenuA();
+		this.setJMenuBar(menuA.jMenuBar);
+
 		
 		
+//		返回第一个面板到主界面
+		JpanelFirst jpanelFirst = new JpanelFirst();
+		JPanel jPanel1 = jpanelFirst.getJPanel();
+				
+//		返回第二个面板到主界面
+		JPanelSecond jPanelSecond= new JPanelSecond();
+		JPanel jPanel2 = jPanelSecond.getJPanelSecond();
+				
+//		返回第三个面板到主界面
+		JPanleThird jPanleThird = new JPanleThird();
+		JPanel jPanel3 = jPanleThird.getJpanelThird();
 		
-		
-		
+				
 		
 		/*
 		 * 分割面板的创建
@@ -68,17 +79,12 @@ public class UiMain extends JFrame{
 		
 		//将固定面板添加
 		vSplitPane.setLeftComponent(jPanel1);
-		
-		
-	
-
+				
 		//创建一个水平分割面板.
 		final JSplitPane hSplitPane=new JSplitPane();
 
 		//分隔条左侧的宽度为150像素.
 		hSplitPane.setDividerLocation(150);
-
-		
 		
 		//添加固定面板
 		hSplitPane.setLeftComponent(jPanel2);
@@ -87,16 +93,20 @@ public class UiMain extends JFrame{
 		//添加到指定区域.
 		vSplitPane.setRightComponent(hSplitPane);
 		
-		
-		
+				
 
 		/*
 		 * 设置主容器的名字、大小，布局。
 		 */
 		
 		setTitle("游泳考勤系统");
-		setVisible(true);
+
+		setVisible(true);		
+
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		
+	
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		
 	}
